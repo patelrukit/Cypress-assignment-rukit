@@ -16,7 +16,12 @@ v16.17.0
 $ npm install
 ```
 
-## Run
+## Then install the dependencies and start the application
+```
+$ npm install
+# Use "npm run start-18" on Node v17+
+$ npm start
+```
 
 To start the application if you are using Node v16 use `npm start` command. If you are using Node v17+ use `npm run start-18` command (because of this [SSL error](https://stackoverflow.com/questions/69692842/error-message-error0308010cdigital-envelope-routinesunsupported)).
 
@@ -36,6 +41,13 @@ To create a production build, use npm run build.
 
 Open the browser and point at `localhost:3000`, you should see the login page.
 
+# Login Credentials:
+```
+username: standard_user
+```
+```
+password: secret_sauce
+```
 The original web application was forked from [saucelabs/sample-app-web](https://github.com/saucelabs/sample-app-web) repo.
 
 ## See also
