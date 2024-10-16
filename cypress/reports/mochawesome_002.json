@@ -1,0 +1,143 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 3,
+    "passes": 3,
+    "pending": 0,
+    "failures": 0,
+    "start": "2024-10-16T05:21:57.199Z",
+    "end": "2024-10-16T05:22:01.950Z",
+    "duration": 4751,
+    "testsRegistered": 3,
+    "passPercent": 100,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "96f75f6a-1095-4023-bd42-95d0edbfb2ea",
+      "title": "",
+      "fullFile": "cypress/integration/priceRangeTest.spec.ts",
+      "file": "cypress/integration/priceRangeTest.spec.ts",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "d5e66937-5a91-450a-bf79-06e00a2c2847",
+          "title": "Price Range Validation",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "should count items with prices between $9.99 and $15.99",
+              "fullTitle": "Price Range Validation should count items with prices between $9.99 and $15.99",
+              "timedOut": null,
+              "duration": 1387,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "cy.fixture('testData').then(function (data) {\n    var _a = data.priceRange, min = _a.min, max = _a.max, expectedCount = _a.expectedCount;\n    productsPage.countPricesInRange(min, max).then(function (count) {\n        cy.log('Count of Prices in Range:', count);\n        expect(count).to.equal(expectedCount); // Use the expected count from the fixture\n    });\n});",
+              "err": {},
+              "uuid": "8a431355-b79c-4eab-8922-d6083a781867",
+              "parentUUID": "d5e66937-5a91-450a-bf79-06e00a2c2847",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "should add an item to the cart and validate cart count",
+              "fullTitle": "Price Range Validation should add an item to the cart and validate cart count",
+              "timedOut": null,
+              "duration": 982,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "cy.fixture('testData').then(function (data) {\n    productsPage.addItemToCart(data.products.add); // Use the product name from JSON\n});\nproductsPage.getCartCount().should('contain', '1'); // Validate the cart count",
+              "err": {},
+              "uuid": "ee7a7a14-282b-4393-aeb0-c8a7c7d8e94e",
+              "parentUUID": "d5e66937-5a91-450a-bf79-06e00a2c2847",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "should remove an item from the cart and validate cart count",
+              "fullTitle": "Price Range Validation should remove an item from the cart and validate cart count",
+              "timedOut": null,
+              "duration": 1056,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "cy.fixture('testData').then(function (data) {\n    productsPage.addItemToCart(data.products.add); // Add item first\n    productsPage.getCartCount().should('contain', '1'); // Validate the cart count\n    productsPage.removeItemFromCart(data.products.add); // Remove the item\n    productsPage.getCartCount().should('not.exist'); // Validate that the cart count no longer exists\n});",
+              "err": {},
+              "uuid": "67a727eb-b6f0-4d23-8f62-082052519441",
+              "parentUUID": "d5e66937-5a91-450a-bf79-06e00a2c2847",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "8a431355-b79c-4eab-8922-d6083a781867",
+            "ee7a7a14-282b-4393-aeb0-c8a7c7d8e94e",
+            "67a727eb-b6f0-4d23-8f62-082052519441"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 3425,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.0.1"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "mochawesome",
+        "saveHtml": true,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "7.1.3"
+    },
+    "marge": {
+      "options": {
+        "reportDir": "cypress/reports",
+        "overwrite": false,
+        "html": true,
+        "json": true
+      },
+      "version": "6.2.0"
+    }
+  }
+}

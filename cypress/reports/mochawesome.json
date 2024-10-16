@@ -1,0 +1,162 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 4,
+    "passes": 4,
+    "pending": 0,
+    "failures": 0,
+    "start": "2024-10-16T05:21:39.934Z",
+    "end": "2024-10-16T05:21:49.363Z",
+    "duration": 9429,
+    "testsRegistered": 4,
+    "passPercent": 100,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "06a3c171-a38d-419f-ae8a-f15a019e6bf7",
+      "title": "",
+      "fullFile": "cypress/integration/checkoutFlow.spec.ts",
+      "file": "cypress/integration/checkoutFlow.spec.ts",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "db4ef5e3-1a3c-451a-8eee-208fe5b2400a",
+          "title": "Checkout Flow Test",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "should complete the checkout flow successfully",
+              "fullTitle": "Checkout Flow Test should complete the checkout flow successfully",
+              "timedOut": null,
+              "duration": 2680,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "cy.fixture('testData').then(function (data) {\n    productsPage.addItemToCart(0);\n    productsPage.goToCart();\n    cy.get('.btn_action').contains('Checkout').click();\n    // Use the loaded data here\n    _pageObject_checkoutPage__WEBPACK_IMPORTED_MODULE_1__.checkoutPage.fillFirstName(data.checkoutInfo.firstName);\n    _pageObject_checkoutPage__WEBPACK_IMPORTED_MODULE_1__.checkoutPage.fillLastName(data.checkoutInfo.lastName);\n    _pageObject_checkoutPage__WEBPACK_IMPORTED_MODULE_1__.checkoutPage.fillZipCode(data.checkoutInfo.zipCode); // Use loaded data for zip code\n    _pageObject_checkoutPage__WEBPACK_IMPORTED_MODULE_1__.checkoutPage.continue();\n    _pageObject_checkoutPage__WEBPACK_IMPORTED_MODULE_1__.checkoutPage.finish();\n    _pageObject_checkoutPage__WEBPACK_IMPORTED_MODULE_1__.checkoutPage.verifyOrderConfirmation();\n});",
+              "err": {},
+              "uuid": "c4821f96-ad52-45e9-93e2-1296f2c12c40",
+              "parentUUID": "db4ef5e3-1a3c-451a-8eee-208fe5b2400a",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "should complete the checkout flow successfully and verify total amount",
+              "fullTitle": "Checkout Flow Test should complete the checkout flow successfully and verify total amount",
+              "timedOut": null,
+              "duration": 2022,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "cy.fixture('testData').then(function (data) {\n    data.cartItems.forEach(function (item) {\n        productsPage.addItemToCart(item.name);\n    });\n    productsPage.goToCart();\n    var expectedTotal = data.cartItems.reduce(function (sum, item) { return sum + item.price; }, 0);\n    cy.get('.btn_action').contains('Checkout').click();\n    _pageObject_checkoutPage__WEBPACK_IMPORTED_MODULE_1__.checkoutPage.fillFirstName(data.checkoutInfo.firstName);\n    _pageObject_checkoutPage__WEBPACK_IMPORTED_MODULE_1__.checkoutPage.fillLastName(data.checkoutInfo.lastName);\n    _pageObject_checkoutPage__WEBPACK_IMPORTED_MODULE_1__.checkoutPage.fillZipCode(data.checkoutInfo.zipCode); // Use loaded data for zip code\n    _pageObject_checkoutPage__WEBPACK_IMPORTED_MODULE_1__.checkoutPage.continue();\n    cy.get('.summary_subtotal_label').invoke('text').then(function (text) {\n        var actualSubtotal = parseFloat(text.replace('Item total: $', ''));\n        expect(actualSubtotal).to.equal(expectedTotal);\n    });\n    _pageObject_checkoutPage__WEBPACK_IMPORTED_MODULE_1__.checkoutPage.finish();\n    _pageObject_checkoutPage__WEBPACK_IMPORTED_MODULE_1__.checkoutPage.verifyOrderConfirmation();\n});",
+              "err": {},
+              "uuid": "810a131b-9384-499a-98e0-3cefd9b056e0",
+              "parentUUID": "db4ef5e3-1a3c-451a-8eee-208fe5b2400a",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "should complete the checkout flow successfully, verify total amount, and validate order tax",
+              "fullTitle": "Checkout Flow Test should complete the checkout flow successfully, verify total amount, and validate order tax",
+              "timedOut": null,
+              "duration": 2005,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "cy.fixture('testData').then(function (data) {\n    data.cartItems.forEach(function (item) {\n        productsPage.addItemToCart(item.name);\n    });\n    productsPage.goToCart();\n    var expectedTotal = data.cartItems.reduce(function (sum, item) { return sum + item.price; }, 0);\n    cy.get('.btn_action').contains('Checkout').click();\n    _pageObject_checkoutPage__WEBPACK_IMPORTED_MODULE_1__.checkoutPage.fillFirstName(data.checkoutInfo.firstName);\n    _pageObject_checkoutPage__WEBPACK_IMPORTED_MODULE_1__.checkoutPage.fillLastName(data.checkoutInfo.lastName);\n    _pageObject_checkoutPage__WEBPACK_IMPORTED_MODULE_1__.checkoutPage.fillZipCode(data.checkoutInfo.zipCode);\n    _pageObject_checkoutPage__WEBPACK_IMPORTED_MODULE_1__.checkoutPage.continue();\n    cy.get('.summary_subtotal_label').invoke('text').then(function (text) {\n        var actualSubtotal = parseFloat(text.replace('Item total: $', ''));\n        expect(actualSubtotal).to.equal(expectedTotal);\n    });\n    var expectedTaxMin = expectedTotal * 0.05;\n    var expectedTaxMax = expectedTotal * 0.10;\n    cy.get('.summary_tax_label').invoke('text').then(function (text) {\n        var actualTax = parseFloat(text.replace('Tax: $', ''));\n        expect(actualTax).to.be.gte(expectedTaxMin);\n        expect(actualTax).to.be.lte(expectedTaxMax);\n    });\n    _pageObject_checkoutPage__WEBPACK_IMPORTED_MODULE_1__.checkoutPage.finish();\n    _pageObject_checkoutPage__WEBPACK_IMPORTED_MODULE_1__.checkoutPage.verifyOrderConfirmation();\n});",
+              "err": {},
+              "uuid": "48ff074a-734c-4a95-81eb-f8d9948700bf",
+              "parentUUID": "db4ef5e3-1a3c-451a-8eee-208fe5b2400a",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "should correctly update cart count when adding and removing items",
+              "fullTitle": "Checkout Flow Test should correctly update cart count when adding and removing items",
+              "timedOut": null,
+              "duration": 1255,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "cy.fixture('testData').then(function (data) {\n    cy.get('.shopping_cart_badge').should('not.exist');\n    var firstItem = data.cartItems[0];\n    productsPage.addItemToCart(firstItem.name);\n    cy.get('.shopping_cart_badge').should('contain', '1');\n    var secondItem = data.cartItems[1];\n    productsPage.addItemToCart(secondItem.name);\n    cy.get('.shopping_cart_badge').should('contain', '2');\n    productsPage.removeItemFromCart(firstItem.name);\n    cy.get('.shopping_cart_badge').should('contain', '1');\n    productsPage.removeItemFromCart(secondItem.name);\n    cy.get('.shopping_cart_badge').should('not.exist');\n});",
+              "err": {},
+              "uuid": "73bdc9a0-71f6-4782-bffa-c7dade2a50a6",
+              "parentUUID": "db4ef5e3-1a3c-451a-8eee-208fe5b2400a",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "c4821f96-ad52-45e9-93e2-1296f2c12c40",
+            "810a131b-9384-499a-98e0-3cefd9b056e0",
+            "48ff074a-734c-4a95-81eb-f8d9948700bf",
+            "73bdc9a0-71f6-4782-bffa-c7dade2a50a6"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 7962,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.0.1"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "mochawesome",
+        "saveHtml": true,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "7.1.3"
+    },
+    "marge": {
+      "options": {
+        "reportDir": "cypress/reports",
+        "overwrite": false,
+        "html": true,
+        "json": true
+      },
+      "version": "6.2.0"
+    }
+  }
+}
